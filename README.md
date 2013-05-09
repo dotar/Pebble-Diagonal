@@ -3,4 +3,4 @@ Pebble-Diagonal
 
 A diagonal watch face for Pebble.
 
-![Diagonal preview](dotar.github.com/Pebble-Diagonal/diagonal-preview.png)
+![Diagonal preview](https://raw.github.com/dotar/Pebble-Diagonal/master/diagonal-preview.png)
