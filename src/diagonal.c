@@ -126,6 +126,7 @@ void handle_deinit(AppContextRef ctx) {
   (void)ctx;
 
   bmp_deinit_container(&background_image);
+  rotbmp_pair_deinit_container(&time_colon_image);
 
   for (int i = 0; i < TOTAL_TIME_DIGITS; i++) {
     rotbmp_pair_deinit_container(&time_digits_images[i]);
