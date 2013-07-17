@@ -14,41 +14,31 @@ PBL_APP_INFO(MY_UUID,
 Window window;
 
 BmpContainer background_image;
-RotBmpPairContainer time_colon_image;
+RotBmpContainer time_colon_image;
 
-const int WHITE_IMAGE_RESOURCE_IDS[] = {
-  RESOURCE_ID_IMAGE_NUM_0_WHITE,
-  RESOURCE_ID_IMAGE_NUM_1_WHITE,
-  RESOURCE_ID_IMAGE_NUM_2_WHITE,
-  RESOURCE_ID_IMAGE_NUM_3_WHITE,
-  RESOURCE_ID_IMAGE_NUM_4_WHITE,
-  RESOURCE_ID_IMAGE_NUM_5_WHITE,
-  RESOURCE_ID_IMAGE_NUM_6_WHITE,
-  RESOURCE_ID_IMAGE_NUM_7_WHITE,
-  RESOURCE_ID_IMAGE_NUM_8_WHITE,
-  RESOURCE_ID_IMAGE_NUM_9_WHITE
-};
-const int BLACK_IMAGE_RESOURCE_IDS[] = {
-  RESOURCE_ID_IMAGE_NUM_0_BLACK,
-  RESOURCE_ID_IMAGE_NUM_1_BLACK,
-  RESOURCE_ID_IMAGE_NUM_2_BLACK,
-  RESOURCE_ID_IMAGE_NUM_3_BLACK,
-  RESOURCE_ID_IMAGE_NUM_4_BLACK,
-  RESOURCE_ID_IMAGE_NUM_5_BLACK,
-  RESOURCE_ID_IMAGE_NUM_6_BLACK,
-  RESOURCE_ID_IMAGE_NUM_7_BLACK,
-  RESOURCE_ID_IMAGE_NUM_8_BLACK,
-  RESOURCE_ID_IMAGE_NUM_9_BLACK
+const int IMAGE_RESOURCE_IDS[] = {
+  RESOURCE_ID_IMAGE_NUM_0, RESOURCE_ID_IMAGE_NUM_1, RESOURCE_ID_IMAGE_NUM_2,
+  RESOURCE_ID_IMAGE_NUM_3, RESOURCE_ID_IMAGE_NUM_4, RESOURCE_ID_IMAGE_NUM_5,
+  RESOURCE_ID_IMAGE_NUM_6, RESOURCE_ID_IMAGE_NUM_7, RESOURCE_ID_IMAGE_NUM_8,
+  RESOURCE_ID_IMAGE_NUM_9
 };
 #define TOTAL_TIME_DIGITS 4
-RotBmpPairContainer time_digits_images[TOTAL_TIME_DIGITS];
+RotBmpContainer time_digits_images[TOTAL_TIME_DIGITS];
 
-void set_container_image(RotBmpPairContainer *bmp_container, const int resource_id_white, const int resource_id_black, GPoint origin) {
+void set_container_image(RotBmpContainer *bmp_container, const int resource_id, GPoint origin) {
 
   layer_remove_from_parent(&bmp_container->layer.layer);
-  rotbmp_pair_deinit_container(bmp_container);
+  rotbmp_deinit_container(bmp_container);
 
-  rotbmp_pair_init_container(resource_id_white, resource_id_black, bmp_container);
+  rotbmp_init_container(resource_id, bmp_container);
+
+	//TODO: This doesn't seem to work when black on white
+  time_digits_images[0].layer.compositing_mode = GCompOpOr;
+  time_digits_images[1].layer.compositing_mode = GCompOpOr;
+  time_colon_image.layer.compositing_mode = GCompOpOr;
+  time_digits_images[2].layer.compositing_mode = GCompOpOr;
+  time_digits_images[3].layer.compositing_mode = GCompOpOr;
+	
 
   GRect frame = layer_get_frame(&bmp_container->layer.layer);
   frame.origin.x = origin.x;
@@ -79,17 +69,16 @@ void update_display(PblTm *current_time) {
 
   // TODO: Remove leading zero?
 
-  set_container_image(&time_digits_images[0], WHITE_IMAGE_RESOURCE_IDS[display_hour/10], BLACK_IMAGE_RESOURCE_IDS[display_hour/10],                 GPoint(-5, 91));
-  set_container_image(&time_digits_images[1], WHITE_IMAGE_RESOURCE_IDS[display_hour%10], BLACK_IMAGE_RESOURCE_IDS[display_hour%10],                 GPoint(18, 68));
-  set_container_image(&time_colon_image,      RESOURCE_ID_IMAGE_COLON_WHITE, RESOURCE_ID_IMAGE_COLON_BLACK,                                         GPoint(40,42));
-  set_container_image(&time_digits_images[2], WHITE_IMAGE_RESOURCE_IDS[current_time->tm_min/10], BLACK_IMAGE_RESOURCE_IDS[current_time->tm_min/10], GPoint(54, 34));
-  set_container_image(&time_digits_images[3], WHITE_IMAGE_RESOURCE_IDS[current_time->tm_min%10], BLACK_IMAGE_RESOURCE_IDS[current_time->tm_min%10], GPoint(77, 11));
-
+  set_container_image(&time_digits_images[0], IMAGE_RESOURCE_IDS[display_hour/10],         GPoint(-5, 91));
+  set_container_image(&time_digits_images[1], IMAGE_RESOURCE_IDS[display_hour%10],         GPoint(18, 68));
+  set_container_image(&time_colon_image,      RESOURCE_ID_IMAGE_COLON,                     GPoint(40,42));
+  set_container_image(&time_digits_images[2], IMAGE_RESOURCE_IDS[current_time->tm_min/10], GPoint(54, 34));
+  set_container_image(&time_digits_images[3], IMAGE_RESOURCE_IDS[current_time->tm_min%10], GPoint(77, 11));
 	
   if (!clock_is_24h_style()) {
     if (display_hour/10 == 0) {
       layer_remove_from_parent(&time_digits_images[0].layer.layer);
-      rotbmp_pair_deinit_container(&time_digits_images[0]);
+      rotbmp_deinit_container(&time_digits_images[0]);
     }
   }
 
@@ -126,10 +115,10 @@ void handle_deinit(AppContextRef ctx) {
   (void)ctx;
 
   bmp_deinit_container(&background_image);
-  rotbmp_pair_deinit_container(&time_colon_image);
+  rotbmp_deinit_container(&time_colon_image);
 
   for (int i = 0; i < TOTAL_TIME_DIGITS; i++) {
-    rotbmp_pair_deinit_container(&time_digits_images[i]);
+    rotbmp_deinit_container(&time_digits_images[i]);
   }
 	
 }
