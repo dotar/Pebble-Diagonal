@@ -1,59 +1,9 @@
 {
     "media": [
         {
-            "defName": "IMAGE_COLON",
+            "defName": "IMAGE_MENU_ICON",
             "type": "png",
-            "file": "images/colon.png"
-        },
-        {
-            "defName": "IMAGE_NUM_9",
-            "type": "png",
-            "file": "images/9.png"
-        },
-        {
-            "defName": "IMAGE_NUM_8",
-            "type": "png",
-            "file": "images/8.png"
-        },
-        {
-            "defName": "IMAGE_NUM_7",
-            "type": "png",
-            "file": "images/7.png"
-        },
-        {
-            "defName": "IMAGE_NUM_6",
-            "type": "png",
-            "file": "images/6.png"
-        },
-        {
-            "defName": "IMAGE_NUM_5",
-            "type": "png",
-            "file": "images/5.png"
-        },
-        {
-            "defName": "IMAGE_NUM_4",
-            "type": "png",
-            "file": "images/4.png"
-        },
-        {
-            "defName": "IMAGE_NUM_3",
-            "type": "png",
-            "file": "images/3.png"
-        },
-        {
-            "defName": "IMAGE_NUM_2",
-            "type": "png",
-            "file": "images/2.png"
-        },
-        {
-            "defName": "IMAGE_NUM_1",
-            "type": "png",
-            "file": "images/1.png"
-        },
-        {
-            "defName": "IMAGE_NUM_0",
-            "type": "png",
-            "file": "images/0.png"
+            "file": "images/diagonal_icon.png"
         },
         {
             "defName": "IMAGE_BACKGROUND",
@@ -61,9 +11,59 @@
             "file": "images/diagonal_bg.png"
         },
         {
-            "defName": "IMAGE_MENU_ICON",
+            "defName": "IMAGE_NUM_0",
             "type": "png",
-            "file": "images/diagonal_icon.png"
+            "file": "images/0.png"
+        },
+        {
+            "defName": "IMAGE_NUM_1",
+            "type": "png",
+            "file": "images/1.png"
+        },
+        {
+            "defName": "IMAGE_NUM_2",
+            "type": "png",
+            "file": "images/2.png"
+        },
+        {
+            "defName": "IMAGE_NUM_3",
+            "type": "png",
+            "file": "images/3.png"
+        },
+        {
+            "defName": "IMAGE_NUM_4",
+            "type": "png",
+            "file": "images/4.png"
+        },
+        {
+            "defName": "IMAGE_NUM_5",
+            "type": "png",
+            "file": "images/5.png"
+        },
+        {
+            "defName": "IMAGE_NUM_6",
+            "type": "png",
+            "file": "images/6.png"
+        },
+        {
+            "defName": "IMAGE_NUM_7",
+            "type": "png",
+            "file": "images/7.png"
+        },
+        {
+            "defName": "IMAGE_NUM_8",
+            "type": "png",
+            "file": "images/8.png"
+        },
+        {
+            "defName": "IMAGE_NUM_9",
+            "type": "png",
+            "file": "images/9.png"
+        },
+        {
+            "defName": "IMAGE_COLON",
+            "type": "png",
+            "file": "images/colon.png"
         }
     ],
     "friendlyVersion": "VERSION",
